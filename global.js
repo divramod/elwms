@@ -22,6 +22,19 @@ jobs.index = co.wrap(function*() {
             var task = require("./tasks/test/index.js");
             yield task.start();
         }
+
+        // =========== [ init project ] ===========
+        else if (["project", "-project", "pr", "-pr"].indexOf(result.job) > -1) {
+            var job = require("./modules/project/index.js");
+            yield job.start(module_path);
+        }
+
+        // =========== [ prompt ] ===========
+        else if (["prompt", "-prompt", "p", "-p"].indexOf(result.job) > -1) {
+            var job = require("./tasks/prompt/index.js");
+            yield job.start(module_path);
+        }
+
         // =========== [ help ] ===========
         else {
             var task = require("./tasks/help/index.js");
